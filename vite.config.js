@@ -6,10 +6,10 @@ import { defineConfig, loadEnv } from 'vite';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const projectRoot = path.resolve(__dirname, '..');
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, projectRoot, '');
+  // Load env from frontend directory for dev/local overrides
+  const env = loadEnv(mode, __dirname, '');
   return {
     root: __dirname,
     plugins: [react(), tailwindcss()],

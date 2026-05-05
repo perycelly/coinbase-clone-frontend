@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import { useState, useEffect } from "react";
 import api from "./lib/api";
 import Navbar from "./components/Navbar";
+import Disclaimer from "./components/Disclaimer";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -35,9 +37,12 @@ export default function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-bg font-sans text-text-main">
+      <div className="min-h-screen bg-bg font-sans text-text-main flex flex-col">
         <Navbar user={user} setUser={setUser} />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-4">
+          <Disclaimer />
+        </div>
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={!user ? <Login setUser={setUser} /> : <Navigate to="/profile" />} />
@@ -45,6 +50,7 @@ export default function App() {
             <Route path="/profile" element={user ? <Profile user={user} /> : <Navigate to="/login" />} />
           </Routes>
         </main>
+        <Footer />
       </div>
     </Router>
   );

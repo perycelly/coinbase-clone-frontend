@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import api from "../lib/api";
 import { motion } from "motion/react";
 import { ChevronRight, Mail, Lock, User } from "lucide-react";
+import Disclaimer from "../components/Disclaimer";
 
 export default function Register() {
   const [formData, setFormData] = useState({ name: "", email: "", password: "" });
@@ -27,7 +28,8 @@ export default function Register() {
   };
 
   return (
-    <div className="max-w-md mx-auto py-12 px-4">
+    <div className="max-w-md mx-auto py-12 px-4 space-y-6">
+      <Disclaimer />
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
