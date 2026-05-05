@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../lib/api";
 import { motion } from "motion/react";
 import { ChevronRight, Mail, Lock } from "lucide-react";
 
@@ -15,7 +15,7 @@ export default function Login({ setUser }) {
     setLoading(true);
     setError("");
     try {
-      const res = await axios.post("/api/login", formData);
+      const res = await api.post("/api/login", formData);
       setUser(res.data.user);
       navigate("/profile");
     } catch (err) {
@@ -30,7 +30,7 @@ export default function Login({ setUser }) {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-surface p-8 rounded-[32px] border border-border shadow-bento"
+        className="bg-surface p-8 rounded-4xl border border-border shadow-bento"
       >
         <header className="mb-8 text-center">
           <h1 className="text-3xl font-black tracking-tighter text-text-main uppercase">Welcome back</h1>

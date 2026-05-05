@@ -1,12 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { LogOut, User, LayoutGrid, TrendingUp, PlusCircle } from "lucide-react";
-import axios from "axios";
+import api from "../lib/api";
 
 export default function Navbar({ user, setUser }) {
   const navigate = useNavigate();
 
   const logout = async () => {
-    await axios.post("/api/logout");
+    await api.post("/api/logout");
     setUser(null);
     navigate("/login");
   };
@@ -33,7 +33,7 @@ export default function Navbar({ user, setUser }) {
             {user ? (
               <>
                 <Link to="/profile" className="flex items-center gap-2 bg-surface border border-border px-4 py-1.5 rounded-full text-xs font-bold text-text-main hover:border-brand transition-all">
-                  <div className="w-5 h-5 rounded-full bg-gradient-to-tr from-brand to-cyan-400"></div>
+                  <div className="w-5 h-5 rounded-full bg-linear-to-tr from-brand to-cyan-400"></div>
                   <span>{user.name}</span>
                 </Link>
                 <button 

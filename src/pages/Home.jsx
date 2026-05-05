@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import axios from "axios";
+import api from "../lib/api";
 import { motion, AnimatePresence } from "motion/react";
 import { Plus, TrendingUp, Clock, LayoutGrid, Search } from "lucide-react";
 
@@ -18,7 +18,7 @@ export default function Home() {
       if (view === "gainers") endpoint = "/api/crypto/gainers";
       if (view === "new") endpoint = "/api/crypto/new";
       
-      const res = await axios.get(endpoint);
+      const res = await api.get(endpoint);
       setCryptos(res.data);
     } catch (err) {
       console.error(err);
@@ -97,7 +97,7 @@ export default function Home() {
                       animate={{ opacity: 1 }}
                       transition={{ delay: idx * 0.03 }}
                       key={crypto.id} 
-                      className="hover:bg-white/[0.02] transition-colors group"
+                      className="hover:bg-white/2 transition-colors group"
                     >
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
@@ -200,7 +200,7 @@ function AddCryptoModal({ onClose, onAdded }) {
     setSubmitting(true);
     setError("");
     try {
-      await axios.post("/api/crypto", formData);
+      await api.post("/api/crypto", formData);
       onAdded();
       onClose();
     } catch (err) {
@@ -216,7 +216,7 @@ function AddCryptoModal({ onClose, onAdded }) {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="bg-surface border border-border rounded-[32px] p-8 max-w-md w-full shadow-2xl relative"
+        className="bg-surface border border-border rounded-4xl p-8 max-w-md w-full shadow-2xl relative"
       >
         <button onClick={onClose} className="absolute top-6 right-6 text-text-dim hover:text-text-main transition-colors">
           <Plus className="rotate-45" size={24} />
